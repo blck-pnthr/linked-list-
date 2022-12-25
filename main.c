@@ -8,7 +8,10 @@ struct node{
     struct node *link;
 };
 struct node *head = NULL;
-void addTail(int data){
+void addTail(){
+    int data;
+    printf("enter any value to insert");
+    scanf("%d", &data);
     struct node *iter;
     struct node *new = (struct node*)malloc(sizeof(struct node));
     new->data = data;
@@ -18,9 +21,12 @@ void addTail(int data){
         iter = iter->link;
     }
 
-        iter->link = new;
+    iter->link = new;
 }
-void addMiddle(int data, int position){
+void addMiddle(){
+    int data,position;
+    printf("enter any data and position to insert the data");
+    scanf("%d %d", &data,&position);
     struct node *new = (struct node*)malloc(sizeof(struct node));
     new->data = data;
 
@@ -32,7 +38,10 @@ void addMiddle(int data, int position){
     new->link = iter->link;
     iter->link = new;
 }
-void addHead(int data){
+void addHead(){
+    int data;
+    printf("enter any integer");
+    scanf("%d", &data);
     struct node *new = (struct node*)malloc(sizeof(struct node));
     new->data = data;
     new->link = NULL;
@@ -40,7 +49,10 @@ void addHead(int data){
     head = new;
 }
 
-void deleteMiddle(int data){
+void deleteMiddle(){
+    int data;
+    printf("enter a vale that you want to delete from the list:");
+    scanf("%d", &data);
     struct node *current;
     current = head;
 
@@ -58,20 +70,53 @@ void deleteMiddle(int data){
 }
 void print()  {
     struct node *index = head;
-while(index !=NULL){
-    printf("%d\n", index->data);
-    index = index->link;
-}
+    while(index !=NULL){
+        printf("%d\n", index->data);
+        index = index->link;
+    }
 }
 
 int main() {
 
+    int choice;
+    while(1){
+        printf("\n*******");
+        printf("\n0. create");
+        printf("\n1. display");
+        printf("\n2. insert at the beginning");
+        printf("\n3. insert node in specific position");
+        printf("\n4. insert node at end of list:");
+        printf("\n5. delete a specific node from the list");
+        printf("\n6. *** to Exit ***");
 
-    addHead(12);
+          printf("\nenter your choice:");
+          scanf("%d", &choice);
+
+        switch (choice) {
+            case 0: addHead();
+            break;
+            case 1: print();
+            break;
+            case 2: addHead();
+            break;
+            case 3: addMiddle();
+            break;
+            case 4: addTail();
+            break;
+            case 5: deleteMiddle();
+            break;
+            case 6: exit(0);
+            default:
+            printf("\nwrong choice");
+            break;
+        }
+    }
+
+
     for (int i = 0; i < 1000; ++i) {
         struct node *new = (struct node*)malloc(sizeof(struct node));
         addTail(i); //filo (first in last out
     }
     print();
-        return 0;
+    return 0;
 }
